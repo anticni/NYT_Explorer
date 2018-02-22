@@ -1,18 +1,20 @@
 #DONE
 -input tags -- year, month and FIND button
+-display search results using ajax in react
 
 #TODO
 
--responsive (mobile-first) styling
--css style - page design
--display search results using ajax without react
--styling of results
--implement reactjs
-
-#BACKLOG
+-mapping first 20 results to render in app
 -progress bar
 -results in pageview
+
+
+#BACKLOG
+
 -bookmarking
+-responsive (mobile-first) styling
+-css style - page design
+-styling of results
 
 
 
