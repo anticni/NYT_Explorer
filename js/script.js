@@ -40,22 +40,21 @@ function find() {
             const articles = this.state.url;
             console.log(articles)
             if (!articles || articles.length==0) {
-                return "no Articles to show"
+                return "no Articles to show";
             }
-            const text = 
-                <div>
-                <a href={articles[0]}>{articles[0]} </a>
-                </div>;
-                debugger;
-            return text;
-        }
+            return <div>{articles.map((article, index) => <Url key={index} url={article} />)}</div>;
+        }    
     }
 
+    function Url(props){
+        return <a href={props.url} target="_blank">{props.url}</a>;
+    }
 
 
 
     const container = document.getElementById('container');
     
     ReactDOM.render(<App />, container);
+        
 
 }
