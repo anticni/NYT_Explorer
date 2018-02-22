@@ -9,23 +9,18 @@ function find() {
 
         constructor(props){
           super(props);
-          this.state = {
-                'url': [],
-                'headliine': []
-            };
+          this.state = {'url': []};
           this.getData = this.getData.bind(this);
         }
 
         getData(data) {
           let url = [];
-          let headline = []
 
           for(var i = 0; i < 20; i++) {
             const doc = data.response.docs[i];
-            url.push(doc.web_url);
-            headline.push(doc.headline.main);
+            url.push(doc.web_url);            
           }
-          this.setState({'url': url, 'headline': headline});
+          this.setState({'url': url});
         }
 
         componentDidMount(){
@@ -41,22 +36,24 @@ function find() {
         }
 
         
-
         render() {
-            const articles = this.state;
-            console.log(articles.url);
-            console.log(articles.headline); 
-            if (!articles || articles.url.length==0) {
+            const articles = this.state.url;
+            console.log(articles)
+            if (!articles || articles.length==0) {
                 return "no Articles to show"
             }
             const text = 
                 <div>
-                <a href={articles.url[0]}>{articles.headline[0]}</a>
+                <a href={articles[0]}>{articles[0]} </a>
                 </div>;
                 debugger;
             return text;
         }
     }
+
+
+
+
     const container = document.getElementById('container');
     
     ReactDOM.render(<App />, container);
