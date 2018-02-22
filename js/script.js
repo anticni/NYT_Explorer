@@ -45,9 +45,11 @@ function find() {
             return <div>{articles.map((article, index) => <Url key={index} url={article} />)}</div>;
         }    
     }
-
-    function Url(props){
-        return <a href={props.url} target="_blank">{props.url}</a>;
+    class Url extends React.Component{
+            
+            render(){
+            return <a href={this.props.url} target="_blank">{this.props.url}</a>;
+            }
     }
 
 

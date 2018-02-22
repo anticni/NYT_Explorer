@@ -2,10 +2,10 @@
 -input tags -- year, month and FIND button
 -display search results using ajax in react
 -mapping first 20 results to render in app
+-create class component for rendering urls(Url class)
 
 #TODO
 
--creating class component for rendering urls
 -adding LinkPreview API
 -progress bar
 -results in pageview
