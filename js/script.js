@@ -50,6 +50,23 @@ function find() {
             render(){
             return <a href={this.props.url} target="_blank">{this.props.url}</a>;
             }
+
+            componentDidMount(){
+
+                $.ajax({
+                    type: "GET",
+                    data: {
+                        "key": "5a8ebb935fe6d61d084d8e03e1012a86b3635549fe59d",
+                        "q": this.props.url
+                    },
+                    url: "http://api.linkpreview.net/",
+                    success: function(data){
+                        console.log('hello from linkpreview');
+                        console.log(data);
+                    }
+                })
+            }
+
     }
 
 

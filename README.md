@@ -3,10 +3,11 @@
 -display search results using ajax in react
 -mapping first 20 results to render in app
 -create class component for rendering urls(Url class)
+-adding LinkPreview API
 
 #TODO
 
--adding LinkPreview API
+-render LinkPreview data instead of urls
 -progress bar
 -results in pageview
 
