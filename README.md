@@ -4,16 +4,18 @@
 -mapping first 20 results to render in app
 -create class component for rendering urls(Url class)
 -adding LinkPreview API
+-render LinkPreview data instead of urls
 
 #TODO
 
--render LinkPreview data instead of urls
+
 -progress bar
 -results in pageview
 
 
 #BACKLOG
 
+-synchronise linkpreview api calls
 -bookmarking
 -responsive (mobile-first) styling
 -css style - page design
