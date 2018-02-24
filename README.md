@@ -5,17 +5,19 @@
 -create class component for rendering urls(Url class)
 -adding LinkPreview API
 -render LinkPreview data instead of urls
+-progress bar
+-synchronise linkpreview api calls
 
 #TODO
 
 
--progress bar
+-JSONified doc results on click
 -results in pageview
 
 
 #BACKLOG
 
--synchronise linkpreview api calls
+-better progress bar
 -bookmarking
 -responsive (mobile-first) styling
 -css style - page design
