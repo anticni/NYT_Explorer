@@ -10,30 +10,31 @@ function find() {
         constructor(props){
 
           super(props);
-          this.state = {'url': [], 'preview':[]};
+          this.state = {'docs': [], 'preview':[]};
           this.getData = this.getData.bind(this);
           this.onChange = this.onChange.bind(this);
         }
 
         getData(data) {
 
-          let url = [];
+          let docs = [];
           for(var i = 0; i < 20; i++) {
             const doc = data.response.docs[i];
-            url.push(doc.web_url);
+            docs.push(doc);
 
             $.ajax({
             type: "GET",
             // data: {
             //     "key": "5a8ebb935fe6d61d084d8e03e1012a86b3635549fe59d",
-            //     "q": this.props.url
+            //     "q": doc.web_url
             // },
             url: "http://api.linkpreview.net/?key=123456&q=https://www.google.com",
             success: this.onChange
           })
 
           }
-          this.setState({'url': url});
+          this.setState({'docs': docs});
+          console.log(this.state.docs)
        
         }
 
@@ -61,7 +62,7 @@ function find() {
 
           const articles = this.state.preview;
           return <div>
-                    <Url article={articles} />
+                    <Url article={articles} docs={this.state.docs} />
                 </div>;
         }    
     }
@@ -72,15 +73,20 @@ function find() {
         constructor(props){
 
           super(props);
-          this.state = {'preview':[]};
+          this.HandleClick = this.HandleClick.bind(this);
         }
         
+        HandleClick(){
+
+        }
+
         render(){
            let link = this.props.article;
+           let details = this.props.docs
            console.log(link);
             if (link.length==20) {
                 
-                return <div>{link.map((link,index) => <Linkpreview link={link} key={index} />)}</div>;  
+                return <div>{link.map((link,index) => <Linkpreview link={link} key={index} details={details[index]} />)}</div>;  
                 
             }
             return <div>
@@ -91,11 +97,13 @@ function find() {
     }
 
     function Linkpreview(props){
+        console.log(props.details)
         return (<div>
                     <p>{props.link.title}</p>
                     <img src={props.link.image} height="100px"></img>
                     <p>{props.link.description}</p>
                     <a href={props.link.url}>{props.link.url}</a>
+                    <ul>{JSON.stringify(props.details, null, 2)}</ul>
                 </div>);
     }
 

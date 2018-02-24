@@ -7,6 +7,7 @@
 -render LinkPreview data instead of urls
 -progress bar
 -synchronise linkpreview api calls
+-JSON details per result in app
 
 #TODO
 
