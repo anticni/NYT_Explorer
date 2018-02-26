@@ -1,8 +1,22 @@
 .container {
-  width:100%;
-  display: inline-flex;
-  flex-wrap: wrap;
 
+}
+.parent-wrapper {
+    height:100%;
+    border: 1px dotted blue;
+}
+.parent {
+    display: flex;
+    flex-wrap:wrap;
+    margin:-10px 0 0 -10px;
+}
+.article{
+    display: inline-block;
+    border: 1px solid black;
+    flex-grow: 1;
+    margin:10px 0 0 10px;
+    width: 20%
+    
 }
 div {
     display: inline-block;
@@ -12,10 +26,9 @@ div {
        display: inline-block !important;
 }
 
-.ArticleBox{
-    border: 1px solid black;
-    width:400px;
-}
+.linkpreview{
+    }
+
 
 
     /* Smartphones (portrait and landscape) ----------- */

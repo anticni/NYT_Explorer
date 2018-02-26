@@ -10,18 +10,38 @@ function find() {
         constructor(props){
 
           super(props);
-          this.state = {'docs': [], 'preview':[]};
+          this.state = {'docs': [], 'preview':[], 'page':0};
           this.getArchive = this.getArchive.bind(this);
           this.getPreview = this.getPreview.bind(this);
+          this.handlePage = this.handlePage.bind(this);
+          this.getPage = this.getPage.bind(this);
         }
 
         getArchive(data) {
-
+            debugger;
           let docs = [];
-          for(var i = 0; i < 20; i++) {
+          for(var i = 0; i < data.response.docs.length; i++) {
             const doc = data.response.docs[i];
             docs.push(doc);
 
+          }
+          this.setState({'docs': docs});
+          console.log(this.state.docs);
+          this.getPage();
+       
+        }
+
+        getPreview(data){
+    
+            var p = this.state.preview;
+            p.push(data);
+            this.setState({preview: p});
+        }
+
+        getPage(){
+            for (var i = this.state.page; i < 20; i++) {
+                const doc = this.state.docs[i].web_url;
+            
             $.ajax({
             type: "GET",
             // data: {
@@ -32,18 +52,20 @@ function find() {
             success: this.getPreview
           })
 
-          }
-          this.setState({'docs': docs});
-          console.log(this.state.docs)
-       
+            }
+            
         }
 
-        getPreview(data){
-    
-            var p = this.state.preview;
-            p.push(data);
-            this.setState({preview: p})
-        }
+
+        handlePage(event) {
+        let pageVal = event.currentTarget.value
+        console.log(pageVal);
+        this.setState({'page': pageVal});
+        this.setState({preview:[]});
+        console.log(this.state.page);
+        this.getPage();
+        debugger;
+    }
 
         componentDidMount(){
 
@@ -59,10 +81,18 @@ function find() {
 
         
         render() {
+            var pagecount = []
+            for (var i = 1; i < this.state.docs.length/4; i++) {
+                        pagecount.push(<option key={i-1} value={i*20-1}>{i}</option>)
+                }
+            console.log(this.state.page);
+            const articles = this.state.preview;
+          return <div className="parent-wrapper">
+                    <Url article={articles} docs={this.state.docs} page={this.state.page} />
+                    <select onChange={this.handlePage}>
+                    {pagecount}
+                    </select>
 
-          const articles = this.state.preview;
-          return <div>
-                    <Url article={articles} docs={this.state.docs} />
                 </div>;
         }    
     }
@@ -80,9 +110,13 @@ function find() {
            let link = this.props.article;
            let details = this.props.docs
            console.log(link);
-            if (link.length==20) {
+            if (link.length>=20) {
                 
-                return <div>{link.map((link,index) => <Linkpreview count={index} link={link} key={index} details={details[index]} />)}</div>;  
+                return <div className="parent">{link.map((link,index) => 
+                        <Linkpreview count={index} link={link} key={index} details={details[index]} />)}
+                        
+
+                       </div>;  
                 
             }
             return <div>
@@ -91,6 +125,8 @@ function find() {
         }
 
     }
+
+
 
     class Linkpreview extends React.Component{
         constructor(props){
@@ -107,9 +143,9 @@ function find() {
 
         render(){
 
-        console.log(this.props.details)
-        return (<div className="flex-item">
-                    <div className="ArticleBox" onClick={this.HandleClick}>
+        // console.log(this.props.details)
+        return (<div className="article">
+                    <div className="linkpreview" onClick={this.HandleClick}>
                     <p>{this.props.link.title}</p>
                     <img src={this.props.link.image} height="100px"></img>
                     <p>{this.props.link.description}</p>

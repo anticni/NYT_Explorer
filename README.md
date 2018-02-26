@@ -9,11 +9,12 @@
 -synchronise linkpreview api calls
 -JSON details per result in app
 -JSONified doc results on click
+-results in pageview
 
 #TODO
 
 -better detail view for both mobile and desktop
--results in pageview
+
 -better progress bar
 -bookmarking,download etc.
 -responsive (mobile-first) css
