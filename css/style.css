@@ -10,11 +10,11 @@ div {
 
 .showhide {
        display: inline-block !important;
-       width:inherit;
 }
 
 .ArticleBox{
     border: 1px solid black;
+    width:400px;
 }
 
 

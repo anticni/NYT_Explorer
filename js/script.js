@@ -11,11 +11,11 @@ function find() {
 
           super(props);
           this.state = {'docs': [], 'preview':[]};
-          this.getData = this.getData.bind(this);
-          this.onChange = this.onChange.bind(this);
+          this.getArchive = this.getArchive.bind(this);
+          this.getPreview = this.getPreview.bind(this);
         }
 
-        getData(data) {
+        getArchive(data) {
 
           let docs = [];
           for(var i = 0; i < 20; i++) {
@@ -29,7 +29,7 @@ function find() {
             //     "q": doc.web_url
             // },
             url: "http://api.linkpreview.net/?key=123456&q=https://www.google.com",
-            success: this.onChange
+            success: this.getPreview
           })
 
           }
@@ -38,10 +38,10 @@ function find() {
        
         }
 
-        onChange(response){
+        getPreview(data){
     
             var p = this.state.preview;
-            p.push(response);
+            p.push(data);
             this.setState({preview: p})
         }
 
@@ -53,7 +53,7 @@ function find() {
                   "api-key": "577c6c7abfb04fef9d593d84decf7d8e"
               },
               url: "https://api.nytimes.com/svc/archive/v1/2016/1.json",
-              success: this.getData
+              success: this.getArchive
           })    
         }
 
