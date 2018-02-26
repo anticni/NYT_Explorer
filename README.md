@@ -8,19 +8,19 @@
 -progress bar
 -synchronise linkpreview api calls
 -JSON details per result in app
+-JSONified doc results on click
 
 #TODO
 
-
--JSONified doc results on click
+-better detail view for both mobile and desktop
 -results in pageview
-
+-better progress bar
+-bookmarking,download etc.
+-responsive (mobile-first) css
 
 #BACKLOG
 
--better progress bar
--bookmarking
--responsive (mobile-first) styling
+
 -css style - page design
 -styling of results
 

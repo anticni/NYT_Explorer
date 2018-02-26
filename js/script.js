@@ -73,10 +73,6 @@ function find() {
         constructor(props){
 
           super(props);
-          this.HandleClick = this.HandleClick.bind(this);
-        }
-        
-        HandleClick(){
 
         }
 
@@ -86,7 +82,7 @@ function find() {
            console.log(link);
             if (link.length==20) {
                 
-                return <div>{link.map((link,index) => <Linkpreview link={link} key={index} details={details[index]} />)}</div>;  
+                return <div>{link.map((link,index) => <Linkpreview count={index} link={link} key={index} details={details[index]} />)}</div>;  
                 
             }
             return <div>
@@ -96,15 +92,33 @@ function find() {
 
     }
 
-    function Linkpreview(props){
-        console.log(props.details)
-        return (<div>
-                    <p>{props.link.title}</p>
-                    <img src={props.link.image} height="100px"></img>
-                    <p>{props.link.description}</p>
-                    <a href={props.link.url}>{props.link.url}</a>
-                    <ul>{JSON.stringify(props.details, null, 2)}</ul>
+    class Linkpreview extends React.Component{
+        constructor(props){
+
+            super(props);
+            this.HandleClick = this.HandleClick.bind(this);
+        }
+
+        HandleClick(props){
+            
+            document.getElementById(this.props.count).classList.toggle('showhide');
+            console.log('hello');
+        }
+
+        render(){
+
+        console.log(this.props.details)
+        return (<div className="flex-item">
+                    <div className="ArticleBox" onClick={this.HandleClick}>
+                    <p>{this.props.link.title}</p>
+                    <img src={this.props.link.image} height="100px"></img>
+                    <p>{this.props.link.description}</p>
+                    <a href={this.props.link.url}>{this.props.link.url}</a>
+                    </div>
+                    <ul id={this.props.count}  style={{display:'none'}}>{JSON.stringify(this.props.details, null, 2)}</ul>
                 </div>);
+        }
+
     }
 
     const container = document.getElementById('container');
@@ -113,3 +127,5 @@ function find() {
         
 
 }
+
+
