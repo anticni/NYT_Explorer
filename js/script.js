@@ -18,7 +18,7 @@ function find() {
         }
 
         getArchive(data) {
-            debugger;
+
           let docs = [];
           for(var i = 0; i < data.response.docs.length; i++) {
             const doc = data.response.docs[i];
@@ -115,7 +115,6 @@ function find() {
                 return <div className="parent">{link.map((link,index) => 
                         <Linkpreview count={index} link={link} key={index} details={details[index]} />)}
                         
-
                        </div>;  
                 
             }
@@ -136,8 +135,14 @@ function find() {
         }
 
         HandleClick(props){
-            
             document.getElementById(this.props.count).classList.toggle('showhide');
+
+            let detailFloat = document.getElementById('detailFloat');
+            var original = document.getElementById(this.props.count).textContent;
+            detailFloat.textContent = "";
+            detailFloat.textContent = original;
+            
+            debugger;
             console.log('hello');
         }
 

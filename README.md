@@ -10,6 +10,7 @@
 -JSON details per result in app
 -JSONified doc results on click
 -results in pageview
+-details in desktop view
 
 #TODO
 
