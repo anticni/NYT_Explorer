@@ -10,11 +10,22 @@ function find() {
         constructor(props){
 
           super(props);
-          this.state = {'docs': [], 'preview':[], 'page':0};
+          this.state = {'docs': [], 'preview':[],'detail':[]};
           this.getArchive = this.getArchive.bind(this);
           this.getPreview = this.getPreview.bind(this);
           this.handlePage = this.handlePage.bind(this);
           this.getPage = this.getPage.bind(this);
+        }
+        componentDidMount(){
+
+          $.ajax({
+              type: "GET",
+              data: {
+                  "api-key": "577c6c7abfb04fef9d593d84decf7d8e"
+              },
+              url: "https://api.nytimes.com/svc/archive/v1/2016/1.json",
+              success: this.getArchive
+          })    
         }
 
         getArchive(data) {
@@ -31,16 +42,13 @@ function find() {
        
         }
 
-        getPreview(data){
-    
-            var p = this.state.preview;
-            p.push(data);
-            this.setState({preview: p});
-        }
+        getPage(page = 0){
+            debugger;
+            var detailArr = []
+            for (var i = page; i < page+5; i++) {
+                const doc = this.state.docs[i];
+                detailArr.push(doc);
 
-        getPage(){
-            for (var i = this.state.page; i < 20; i++) {
-                const doc = this.state.docs[i].web_url;
             
             $.ajax({
             type: "GET",
@@ -50,45 +58,42 @@ function find() {
             // },
             url: "http://api.linkpreview.net/?key=123456&q=https://www.google.com",
             success: this.getPreview
-          })
+            })
 
             }
-            
+            this.setState({'detail':detailArr});
         }
+
+        getPreview(data){
+    
+            var p = this.state.preview;
+            p.push(data);
+            this.setState({preview: p});
+        }
+
+
 
 
         handlePage(event) {
-        let pageVal = event.currentTarget.value
+        let pageVal = Number(event.currentTarget.value);
         console.log(pageVal);
-        this.setState({'page': pageVal});
-        this.setState({preview:[]});
-        console.log(this.state.page);
-        this.getPage();
+        this.setState({preview:[],detail:[]});
+        this.getPage(pageVal);
         debugger;
     }
 
-        componentDidMount(){
 
-          $.ajax({
-              type: "GET",
-              data: {
-                  "api-key": "577c6c7abfb04fef9d593d84decf7d8e"
-              },
-              url: "https://api.nytimes.com/svc/archive/v1/2016/1.json",
-              success: this.getArchive
-          })    
-        }
 
         
         render() {
             var pagecount = []
-            for (var i = 1; i < this.state.docs.length/4; i++) {
-                        pagecount.push(<option key={i-1} value={i*20-1}>{i}</option>)
+            for (var i = 1; i <= Math.ceil(this.state.docs.length/20); i++) {
+
+                        pagecount.push(<option key={i-1} value={(i-1)*20}>{i}</option>)
                 }
-            console.log(this.state.page);
-            const articles = this.state.preview;
+        
           return <div className="parent-wrapper">
-                    <Url article={articles} docs={this.state.docs} page={this.state.page} />
+                    <Url article={this.state.preview} docs={this.state.docs} detail={this.state.detail}/>
                     <select onChange={this.handlePage}>
                     {pagecount}
                     </select>
@@ -108,8 +113,9 @@ function find() {
 
         render(){
            let link = this.props.article;
-           let details = this.props.docs
+           let details = this.props.detail
            console.log(link);
+           console.log(details);
             if (link.length>=20) {
                 
                 return <div className="parent">{link.map((link,index) => 
@@ -142,7 +148,6 @@ function find() {
             detailFloat.textContent = "";
             detailFloat.textContent = original;
             
-            debugger;
             console.log('hello');
         }
 

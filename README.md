@@ -22,7 +22,7 @@
 
 #BACKLOG
 
-
+-display last <20 search results 
 -css style - page design
 -styling of results
 
