@@ -49,7 +49,9 @@ img {
     margin:10px;
 }
 
-
+.ui-datepicker-calendar {
+    display: none;
+}
 /* 
   ##Device = Desktops
   ##Screen = 1281px to higher resolution desktops

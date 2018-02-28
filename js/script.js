@@ -1,8 +1,17 @@
+const monthNames = ["January", "February", "March", "April", "May", "June",
+  "July", "August", "September", "October", "November", "December"
+];
+for (var i = 1; i<=12; i++){
+    $('#monthpicker').append($('<option />').val(i).html(monthNames[i-1]));
+}
+for (var i = new Date().getFullYear(); i > 1850; i--){
+    $('#yearpicker').append($('<option />').val(i).html(i));
+}
+
+
 function find() {
     // body...
-    let month = $('#month').val();
-    let year = $('#year').val();
-
+    
     
 
     class App extends React.Component {
@@ -17,13 +26,18 @@ function find() {
           this.getPage = this.getPage.bind(this);
         }
         componentDidMount(){
-
+            const month = $('#monthpicker').val();
+            const year = $('#yearpicker').val();
+            const date = year + "/" + month;
+            if (month ==""||year=="") {
+                return this.setState({docs:['0']})
+            }
           $.ajax({
               type: "GET",
               data: {
                   "api-key": "577c6c7abfb04fef9d593d84decf7d8e"
               },
-              url: "https://api.nytimes.com/svc/archive/v1/2016/1.json",
+              url: "https://api.nytimes.com/svc/archive/v1/"+date+".json",
               success: this.getArchive
           })    
         }
@@ -93,7 +107,9 @@ function find() {
 
         
         render() {
-            
+            if (this.state.docs[0]==0) {
+                return <div className="nodate">Please enter date</div>
+            }
         
           return <div className="parent-wrapper">
                     <Url article={this.state.preview} docs={this.state.docs} detail={this.state.detail} lastpage={this.state.lastpage} action={this.handlePage} />

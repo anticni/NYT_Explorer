@@ -13,9 +13,12 @@
 -details in desktop view
 -display last <20 search results
 -bug -- loading does not show for last page 
+-better date picker
+-pretty print for json details
 
 #TODO
--pretty print for json details
+
+-bug -- move archiveAPI ajax call so it can be called multiple times
 -better detail view for both mobile and desktop
 -better progress bar
 -bookmarking,download etc.
