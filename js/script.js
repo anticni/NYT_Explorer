@@ -43,7 +43,7 @@ function find() {
         }
 
         getPage(page = 0){
-            debugger;
+            
             var detailArr = []
             for (var i = page; i < page+20; i++) {
                 const doc = this.state.docs[i];
@@ -115,7 +115,6 @@ function find() {
         render(){
            let link = this.props.article;
            let details = this.props.detail;
-           console.log(link);
            console.log(details);
            var pagecount = []
             for (var i = 1; i <= Math.ceil(this.props.docs.length/20); i++) {
@@ -161,6 +160,7 @@ function find() {
 
         render(){
 
+            console.log(this.props.details);
         // console.log(this.props.details)
         return (<div className="article">
                     <div className="linkpreview" onClick={this.HandleClick}>
@@ -168,8 +168,9 @@ function find() {
                     <img src={this.props.link.image} height="100px"></img>
                     <p>{this.props.link.description}</p>
                     <a href={this.props.link.url}>{this.props.link.url}</a>
+                    <p style={{'text-align':'center'}} className="caret">&#9660;</p>
                     </div>
-                    <ul id={this.props.count}  style={{display:'none'}}>{JSON.stringify(this.props.details, null, 2)}</ul>
+                            <pre id={this.props.count}  style={{display:'none'}}>{JSON.stringify(this.props.details, null, 2)}</pre>
                 </div>);
         }
 
