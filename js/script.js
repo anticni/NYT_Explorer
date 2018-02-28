@@ -10,7 +10,7 @@ function find() {
         constructor(props){
 
           super(props);
-          this.state = {'docs': [], 'preview':[],'detail':[]};
+          this.state = {'docs': [], 'preview':[],'detail':[],'lastpage':false};
           this.getArchive = this.getArchive.bind(this);
           this.getPreview = this.getPreview.bind(this);
           this.handlePage = this.handlePage.bind(this);
@@ -45,8 +45,12 @@ function find() {
         getPage(page = 0){
             debugger;
             var detailArr = []
-            for (var i = page; i < page+5; i++) {
+            for (var i = page; i < page+20; i++) {
                 const doc = this.state.docs[i];
+                if (doc == undefined) { 
+                    this.setState({lastpage:true});
+                    break; 
+                }
                 detailArr.push(doc);
 
             
@@ -76,27 +80,24 @@ function find() {
 
         handlePage(event) {
         let pageVal = Number(event.currentTarget.value);
+        document.getElementById('detailFloat').textContent = "";
         console.log(pageVal);
-        this.setState({preview:[],detail:[]});
+        this.setState({preview:[],detail:[],lastpage:false});
+        
         this.getPage(pageVal);
-        debugger;
+
+        
     }
 
 
 
         
         render() {
-            var pagecount = []
-            for (var i = 1; i <= Math.ceil(this.state.docs.length/20); i++) {
-
-                        pagecount.push(<option key={i-1} value={(i-1)*20}>{i}</option>)
-                }
+            
         
           return <div className="parent-wrapper">
-                    <Url article={this.state.preview} docs={this.state.docs} detail={this.state.detail}/>
-                    <select onChange={this.handlePage}>
-                    {pagecount}
-                    </select>
+                    <Url article={this.state.preview} docs={this.state.docs} detail={this.state.detail} lastpage={this.state.lastpage} action={this.handlePage} />
+                    
 
                 </div>;
         }    
@@ -113,14 +114,21 @@ function find() {
 
         render(){
            let link = this.props.article;
-           let details = this.props.detail
+           let details = this.props.detail;
            console.log(link);
            console.log(details);
-            if (link.length>=20) {
-                
+           var pagecount = []
+            for (var i = 1; i <= Math.ceil(this.props.docs.length/20); i++) {
+
+                        pagecount.push(<option key={i-1} value={(i-1)*20}>{i}</option>)
+                }
+            if (link.length>=20 || this.props.lastpage) {
+
                 return <div className="parent">{link.map((link,index) => 
                         <Linkpreview count={index} link={link} key={index} details={details[index]} />)}
-                        
+                        <select className="selectpage" onChange={this.handlePage}>
+                    {pagecount}
+                    </select>
                        </div>;  
                 
             }
@@ -173,5 +181,7 @@ function find() {
         
 
 }
+
+
 
 

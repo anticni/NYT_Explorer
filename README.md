@@ -11,18 +11,19 @@
 -JSONified doc results on click
 -results in pageview
 -details in desktop view
+-display last <20 search results
+-bug -- loading does not show for last page 
 
 #TODO
-
+-pretty print for json details
 -better detail view for both mobile and desktop
-
 -better progress bar
 -bookmarking,download etc.
 -responsive (mobile-first) css
 
 #BACKLOG
 
--display last <20 search results 
+
 -css style - page design
 -styling of results
 
