@@ -15,6 +15,7 @@
 -bug -- loading does not show for last page 
 -better date picker
 -pretty print for json details
+-responsive css
 
 #TODO
 
@@ -22,7 +23,6 @@
 -better detail view for both mobile and desktop
 -better progress bar
 -bookmarking,download etc.
--responsive (mobile-first) css
 
 #BACKLOG
 

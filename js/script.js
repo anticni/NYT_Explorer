@@ -19,7 +19,7 @@ function find() {
         constructor(props){
 
           super(props);
-          this.state = {'docs': [], 'preview':[],'detail':[],'lastpage':false};
+          this.state = {'docs': [], 'preview':[],'detail':[],'page':0,'lastpage':false};
           this.getArchive = this.getArchive.bind(this);
           this.getPreview = this.getPreview.bind(this);
           this.handlePage = this.handlePage.bind(this);
@@ -93,10 +93,12 @@ function find() {
 
 
         handlePage(event) {
+        document.getElementById('root').className = 'root';
+        $("#selectpage").appendTo("#flexbox");
         let pageVal = Number(event.currentTarget.value);
         document.getElementById('detailFloat').textContent = "";
         console.log(pageVal);
-        this.setState({preview:[],detail:[],lastpage:false});
+        this.setState({page:pageVal,preview:[],detail:[],lastpage:false});
         
         this.getPage(pageVal);
 
@@ -111,8 +113,8 @@ function find() {
                 return <div className="nodate">Please enter date</div>
             }
         
-          return <div className="parent-wrapper">
-                    <Url article={this.state.preview} docs={this.state.docs} detail={this.state.detail} lastpage={this.state.lastpage} action={this.handlePage} />
+          return <div className="root-wrapper">
+                    <Url article={this.state.preview} pageval={this.state.page} docs={this.state.docs} detail={this.state.detail} lastpage={this.state.lastpage} action={this.handlePage} />
                     
 
                 </div>;
@@ -127,7 +129,10 @@ function find() {
           super(props);
 
         }
-
+        componentDidUpdate(){
+            $("#selectpage").appendTo("#root");
+            
+        }
         render(){
            let link = this.props.article;
            let details = this.props.detail;
@@ -139,11 +144,13 @@ function find() {
                 }
             if (link.length>=20 || this.props.lastpage) {
 
-                return <div className="parent">{link.map((link,index) => 
+                return <div className="flexbox" id="flexbox">{link.map((link,index) => 
                         <Linkpreview count={index} link={link} key={index} details={details[index]} />)}
-                        <select className="selectpage" onChange={this.handlePage}>
-                    {pagecount}
-                    </select>
+                        <div className="selectpage" id="selectpage">Page:
+                        <select className="selectbtn" value={this.props.pageval} onChange={this.props.action}>
+                        {pagecount}
+                        </select>
+                        </div>
                        </div>;  
                 
             }
@@ -165,7 +172,7 @@ function find() {
 
         HandleClick(props){
             document.getElementById(this.props.count).classList.toggle('showhide');
-
+            document.getElementById('root').className = 'root-clicked';
             let detailFloat = document.getElementById('detailFloat');
             var original = document.getElementById(this.props.count).textContent;
             detailFloat.textContent = "";
@@ -192,9 +199,9 @@ function find() {
 
     }
 
-    const container = document.getElementById('container');
+    const root = document.getElementById('root');
     
-    ReactDOM.render(<App />, container);
+    ReactDOM.render(<App />, root);
         
 
 }
