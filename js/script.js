@@ -61,6 +61,7 @@ function find() {
             var detailArr = []
             for (var i = page; i < page+20; i++) {
                 const doc = this.state.docs[i];
+                console.log(detailArr)
                 if (doc == undefined) { 
                     this.setState({lastpage:true});
                     break; 
@@ -87,6 +88,7 @@ function find() {
             var p = this.state.preview;
             p.push(data);
             this.setState({preview: p});
+            console.log(this.state.preview);
         }
 
 
@@ -94,7 +96,6 @@ function find() {
 
         handlePage(event) {
         document.getElementById('root').className = 'root';
-        $("#selectpage").appendTo("#flexbox");
         let pageVal = Number(event.currentTarget.value);
         document.getElementById('detailFloat').textContent = "";
         console.log(pageVal);
@@ -109,15 +110,28 @@ function find() {
 
         
         render() {
+            var pagecount = []
+            for (var i = 1; i <= Math.ceil(this.state.docs.length/20); i++) {
+
+                        pagecount.push(<option key={i-1} value={(i-1)*20}>{i}</option>)
+                }
+
             if (this.state.docs[0]==0) {
                 return <div className="nodate">Please enter date</div>
             }
-        
-          return <div className="root-wrapper">
-                    <Url article={this.state.preview} pageval={this.state.page} docs={this.state.docs} detail={this.state.detail} lastpage={this.state.lastpage} action={this.handlePage} />
-                    
+            if (this.state.preview.length >= 20 || this.state.lastpage == undefined) {
+                return   <div className="root-wrapper">
+                             <Url article={this.state.preview} docs={this.state.docs} detail={this.state.detail} />
+                         <div className="selectpage" id="selectpage">Page:
+                                <select className="selectbtn" value={this.state.page} onChange={this.handlePage}>
+                                {pagecount}
+                                </select>
+                        </div>
 
-                </div>;
+                         </div>;     
+                
+            }
+            return <div> loading</div>
         }    
     }
 
@@ -130,33 +144,24 @@ function find() {
 
         }
         componentDidUpdate(){
-            $("#selectpage").appendTo("#root");
+            // $("#selectpage").appendTo("#root");
             
         }
         render(){
            let link = this.props.article;
            let details = this.props.detail;
-           console.log(details);
-           var pagecount = []
-            for (var i = 1; i <= Math.ceil(this.props.docs.length/20); i++) {
-
-                        pagecount.push(<option key={i-1} value={(i-1)*20}>{i}</option>)
-                }
-            if (link.length>=20 || this.props.lastpage) {
+           // console.log(details);
+           console.log(link);
+           
+            
 
                 return <div className="flexbox" id="flexbox">{link.map((link,index) => 
                         <Linkpreview count={index} link={link} key={index} details={details[index]} />)}
-                        <div className="selectpage" id="selectpage">Page:
-                        <select className="selectbtn" value={this.props.pageval} onChange={this.props.action}>
-                        {pagecount}
-                        </select>
-                        </div>
+                        
                        </div>;  
                 
-            }
-            return <div>
-                    loading...
-                   </div>;
+            
+           
         }
 
     }
@@ -183,7 +188,7 @@ function find() {
 
         render(){
 
-            console.log(this.props.details);
+            // console.log(this.props.details);
         // console.log(this.props.details)
         return (<div className="article">
                     <div className="linkpreview" onClick={this.HandleClick}>
@@ -191,9 +196,9 @@ function find() {
                     <img src={this.props.link.image} height="100px"></img>
                     <p>{this.props.link.description}</p>
                     <a href={this.props.link.url}>{this.props.link.url}</a>
-                    <p style={{'text-align':'center'}} className="caret">&#9660;</p>
+                    <p style={{'textAlign':'center'}} className="caret">&#9660;</p>
                     </div>
-                            <pre id={this.props.count}  style={{display:'none'}}>{JSON.stringify(this.props.details, null, 2)}</pre>
+                            <div id={this.props.count}  style={{display:'none'}}>{JSON.stringify(this.props.details, undefined, '\n')}</div>
                 </div>);
         }
 

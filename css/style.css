@@ -18,7 +18,6 @@
     height:100%;
     display: flex;
     flex-wrap:wrap;
-    margin:-10px 0 0 -10px;
 }
 
 .linkpreview{
@@ -30,30 +29,30 @@ div {
 }
 
 
-
 img {
-    max-width: 100%;
+    max-width: 90%;
     height: auto;
 }
 
-.selectpage{
-    margin:10px;
-}
+
 
 .showhide{
     display:none;
 }
+pre {
 
-
+    overflow: scroll;       /* Internet Explorer 5.5+ */
+}
+.selectpage{
+    margin:10px;
+}
 
     /* Smartphones (portrait and landscape) ----------- */
 @media only screen and (min-device-width : 320px) and (max-device-width : 480px) {
 /* Styles */
 .showhide {
        display: block !important;
-       word-wrap: break-word;
-       overflow-wrap: break-word;
-       white-space: normal;
+
 }
 .root-clicked{
     width:100%;
@@ -63,13 +62,11 @@ img {
 }
 
 /* Smartphones (landscape) ----------- */
-@media only screen and (min-width : 321px) and (max-width: 480px) {
+@media only screen and (min-width : 320px) and (max-width: 480px) {
 /* Styles */
 .showhide {
-       display: block !important;
-       word-wrap: break-word;
-       overflow-wrap: break-word;
-       white-space: normal;
+       display: inline-block !important;
+
 }
 .root-clicked{
     width:100%;
@@ -81,11 +78,10 @@ display:none;
     display: inline-block;
     border: 1px solid black;
     flex-grow: 1;
-    margin:10px 0 0 10px;
+    margin:10px 0 0 0;
     width: 100%;
     height: 80%;
     overflow-wrap: break-word;
-    white-space: normal;
 }
 }
 
@@ -94,9 +90,7 @@ display:none;
 /* Styles */
 .showhide {
        display: block !important;
-       word-wrap: break-word;
-       overflow-wrap: break-word;
-       white-space: normal;
+  
 }
 .root-clicked{
     width:100%;
@@ -108,16 +102,15 @@ display:none;
     display: inline-block;
     border: 1px solid black;
     flex-grow: 1;
-    margin:10px 0 0 10px;
+    margin:10px 0 0 0;
     width: 100%;
     height: 80%;
     overflow-wrap: break-word;
-    white-space: normal;
 }
 }
 
 /* Tablet (portrait and landscape) ----------- */
-@media only screen and (min-device-width : 768px) and (max-device-width : 1024px) {
+@media only screen and (min-width : 480px) and (max-width : 1024px) {
 /* Styles */
 .detailFloat{
     width:25%;
@@ -130,11 +123,10 @@ display:none;
     display: inline-block;
     border: 1px solid black;
     flex-grow: 1;
-    margin:10px 0 0 10px;
+    margin:8px 8px 0 0;
     width: 40%;
     height: 30%;
     overflow-wrap: break-word;
-    white-space: normal;
 }
 
 }
@@ -142,7 +134,7 @@ display:none;
 
 
 /* Desktops and laptops ----------- */
-@media only screen  and (min-width : 1224px) {
+@media only screen  and (min-width : 1024px) {
 /* Styles */
 .detailFloat{
     width:25%;
@@ -155,11 +147,10 @@ display:none;
     display: inline-block;
     border: 1px solid black;
     flex-grow: 1;
-    margin:10px 0 0 10px;
+    margin:10px 10px 0 0;
     width: 20%;
     height: 20%;
     overflow-wrap: break-word;
-    white-space: normal;
 }
 
 }
@@ -178,11 +169,10 @@ display:none;
     display: inline-block;
     border: 1px solid black;
     flex-grow: 1;
-    margin:10px 0 0 10px;
+    margin:10px 10px 0 0;
     width: 20%;
     height: 20%;
     overflow-wrap: break-word;
-    white-space: normal;
 }
 
 }
