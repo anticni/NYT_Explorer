@@ -95,7 +95,7 @@ function find() {
 
 
         handlePage(event) {
-        document.getElementById('root').className = 'root';
+        document.getElementById('cards').className = 'cards';
         let pageVal = Number(event.currentTarget.value);
         document.getElementById('detailFloat').textContent = "";
         console.log(pageVal);
@@ -121,7 +121,10 @@ function find() {
             }
             if (this.state.preview.length >= 20 || this.state.lastpage == undefined) {
                 return   <div className="root-wrapper">
+                             <div className="inline">
                              <Url article={this.state.preview} docs={this.state.docs} detail={this.state.detail} />
+                             <pre className="detailFloat" id="detailFloat"></pre>
+                             </div>
                          <div className="selectpage" id="selectpage">Page:
                                 <select className="selectbtn" value={this.state.page} onChange={this.handlePage}>
                                 {pagecount}
@@ -155,7 +158,7 @@ function find() {
            
             
 
-                return <div className="flexbox" id="flexbox">{link.map((link,index) => 
+                return <div className="cards" id="cards">{link.map((link,index) => 
                         <Linkpreview count={index} link={link} key={index} details={details[index]} />)}
                         
                        </div>;  
@@ -173,11 +176,12 @@ function find() {
 
             super(props);
             this.HandleClick = this.HandleClick.bind(this);
+
         }
 
         HandleClick(props){
             document.getElementById(this.props.count).classList.toggle('showhide');
-            document.getElementById('root').className = 'root-clicked';
+            document.getElementById('cards').className = 'cards clicked';
             let detailFloat = document.getElementById('detailFloat');
             var original = document.getElementById(this.props.count).textContent;
             detailFloat.textContent = "";
@@ -186,20 +190,25 @@ function find() {
             console.log('hello');
         }
 
+
+
         render(){
 
             // console.log(this.props.details);
         // console.log(this.props.details)
-        return (<div className="article">
-                    <div className="linkpreview" onClick={this.HandleClick}>
-                    <p>{this.props.link.title}</p>
-                    <img src={this.props.link.image} height="100px"></img>
+        return (<div className="card" onClick={this.HandleClick}>
+                    <header>
+                    <h2>{this.props.link.title}</h2>
+                    </header>
+                    
+                    <img src={this.props.link.image}></img>
+                    <div className="body">
                     <p>{this.props.link.description}</p>
-                    <a href={this.props.link.url}>{this.props.link.url}</a>
+                    <a href={this.props.link.url}>Link</a>
                     <p style={{'textAlign':'center'}} className="caret">&#9660;</p>
+                    <pre id={this.props.count}  style={{display:'none'}}>{JSON.stringify(this.props.details, undefined, 2)}</pre>
                     </div>
-                            <div id={this.props.count}  style={{display:'none'}}>{JSON.stringify(this.props.details, undefined, '\n')}</div>
-                </div>);
+                    </div>);
         }
 
     }

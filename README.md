@@ -16,11 +16,12 @@
 -better date picker
 -pretty print for json details
 -responsive css
+-better detail view for both mobile and desktop
+-styling of results
+
 
 #TODO
 
--bug -- move archiveAPI ajax call so it can be called multiple times
--better detail view for both mobile and desktop
 -better progress bar
 -bookmarking,download etc.
 
@@ -28,7 +29,6 @@
 
 
 -css style - page design
--styling of results
 
 
 

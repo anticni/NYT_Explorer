@@ -3,7 +3,7 @@
 
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
     <title>NYTimes Explorer</title>
     <!-- meta tags -->
     <meta name="description" content="single page web app that enables end user to explore NY Times archive of articles">
@@ -33,21 +33,23 @@
 
     <div class="searchbox">
         <label for="monthpicker">Date :</label>
-         <select name="monthpicker" id="monthpicker">
+         <select name="monthpicker" id="monthpicker" class="datepicker">
              <option style="display:none" value="" selected>Month</option>
          </select>
-         <select name="yearpicker" id="yearpicker">
+         <select name="yearpicker" id="yearpicker" class="datepicker">
             <option style="display:none" value="" selected>Year</option>
          </select>
-    <button type="submit" onclick="find()">Submit</button>
+    <button type="submit" class="findbtn" onclick="find()">Submit</button>
     </div>
     
-    <div class="wrapper">
     <div class="root" id="root"></div>
-    <pre class="detailFloat" id="detailFloat"></pre>
-    </div>
-
-
+    
+    
+  
+  
+ 
+  
+</div>
 
 </body>
 
