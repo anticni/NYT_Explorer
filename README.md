@@ -18,16 +18,15 @@
 -responsive css
 -better detail view for both mobile and desktop
 -styling of results
-
+-bookmarks(using google bookmarks)
 
 #TODO
 
 -better progress bar
--bookmarking,download etc.
 
 #BACKLOG
 
-
+-bookmarking,download etc.(more features)
 -css style - page design
 
 

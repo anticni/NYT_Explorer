@@ -176,7 +176,7 @@ function find() {
 
             super(props);
             this.HandleClick = this.HandleClick.bind(this);
-
+            this.HandleBookmark = this.HandleBookmark.bind(this);
         }
 
         HandleClick(props){
@@ -190,7 +190,13 @@ function find() {
             console.log('hello');
         }
 
+        HandleBookmark(props){
+            let url = encodeURIComponent(this.props.link.url);
+            let title = encodeURIComponent(this.props.link.title);
 
+            window.open("https://www.google.com/bookmarks/mark?op=edit&output=popup&bkmk="+url+"&title="+title);
+
+        }
 
         render(){
 
@@ -198,7 +204,7 @@ function find() {
         // console.log(this.props.details)
         return (<div className="card" onClick={this.HandleClick}>
                     <header>
-                    <h2>{this.props.link.title}</h2>
+                    <h2>{this.props.link.title}<a className="bookmark-star" onClick={this.HandleBookmark}>&#9733;</a></h2>
                     </header>
                     
                     <img src={this.props.link.image}></img>

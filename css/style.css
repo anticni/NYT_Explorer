@@ -107,6 +107,16 @@ pre {
     margin:10px;
 }
 
+/*BOOKMARK CSS*/
+.bookmark-star{
+    color:white;
+    display:inline;
+    float:right;
+    cursor:pointer;
+}
+.bookmark-star:hover{
+    color:yellow;
+}
 
 
 /* Smartphones (landscape) ----------- */
