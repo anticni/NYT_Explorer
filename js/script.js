@@ -1,18 +1,72 @@
 const monthNames = ["January", "February", "March", "April", "May", "June",
   "July", "August", "September", "October", "November", "December"
 ];
-for (var i = 1; i<=12; i++){
-    $('#monthpicker').append($('<option />').val(i).html(monthNames[i-1]));
-}
-for (var i = new Date().getFullYear(); i > 1850; i--){
-    $('#yearpicker').append($('<option />').val(i).html(i));
-}
+// for (var i = 1; i<=12; i++){
+//     $('#monthpick').append($('<option />').val(i).html(monthNames[i-1]));
+// }
+// for (var i = new Date().getFullYear(); i > 1850; i--){
+//     $('#yearpick').append($('<option />').val(i).html(i));
+// }
 
 
-function find() {
-    // body...
-    
-    
+    class First extends React.Component{
+        
+        constructor(props){
+
+            super(props);
+            this.state = {year:"",month:""};
+            this.handleDate = this.handleDate.bind(this);
+            this.handleSubmit = this.handleSubmit.bind(this);
+        }
+
+
+        handleDate(event){
+            const year = document.getElementById('yearpick').value;
+            const month = document.getElementById('monthpick').value;
+            this.setState({year:year,month:month});
+        }
+
+        handleSubmit(event) {
+            event.preventDefault();
+            console.log(event.target.value)
+            const year = document.getElementById('yearpick').value;
+            const month = document.getElementById('monthpick').value;
+            this.setState({year:year,month:month});
+            console.log(this.state)
+        }
+
+        render(){
+            let yearselect = [];
+                for (var i = 2018; i > 1850; i--) {
+                    yearselect.push(<option key={i} value={i}>{i}</option>);
+                }
+            let form = <form onSubmit={this.handleSubmit}>
+                              <select name="monthpicker" id="monthpick" className="datepicker">
+                                  <option style={{display:'none'}} value="">Month</option>
+                                  {monthNames.map((month,index) => 
+                                         <option key={index} value={index+1}>{month}</option>)}
+                              </select>
+                              <select name="yearpicker" id="yearpick" className="datepicker">
+                                <option style={{display:'none'}} value="">Year</option>
+                                {yearselect}
+                              </select>
+                         <input type="submit" className="findbtn" value="Find" />
+                         </form> ;
+            if (this.state.year=="" || this.state.month=="") {
+                return (<div>
+                            {form}
+                            Enter a Date
+                        </div>);
+            }                         
+                return (<div>
+                            <div className="searchbox">
+                            {form}
+                            </div>
+                            <App year={this.state.year} month={this.state.month} />
+                        </div>);
+               
+            }
+        }
 
     class App extends React.Component {
 
@@ -24,10 +78,20 @@ function find() {
           this.getPreview = this.getPreview.bind(this);
           this.handlePage = this.handlePage.bind(this);
           this.getPage = this.getPage.bind(this);
+          this.ajax = this.ajax.bind(this);
         }
+
         componentDidMount(){
-            const month = $('#monthpicker').val();
-            const year = $('#yearpicker').val();
+            this.ajax();
+            debugger;
+        }
+        componentWillReceiveProps(){
+            this.ajax();
+            debugger;
+        }
+        ajax(){
+            const month = this.props.month;
+            const year = this.props.year;
             const date = year + "/" + month;
             if (month ==""||year=="") {
                 return this.setState({docs:['0']})
@@ -50,7 +114,7 @@ function find() {
             docs.push(doc);
 
           }
-          this.setState({'docs': docs});
+          this.setState({'docs': docs,preview:[]});
           console.log(this.state.docs);
           this.getPage();
        
@@ -84,7 +148,7 @@ function find() {
         }
 
         getPreview(data){
-    
+
             var p = this.state.preview;
             p.push(data);
             this.setState({preview: p});
@@ -219,13 +283,13 @@ function find() {
 
     }
 
-    const root = document.getElementById('root');
-    
-    ReactDOM.render(<App />, root);
+
         
 
-}
 
 
 
+    const root = document.getElementById('root');
+    
+    ReactDOM.render(<First />, root);
 
