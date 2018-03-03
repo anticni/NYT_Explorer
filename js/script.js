@@ -179,6 +179,7 @@ const monthNames = ["January", "February", "March", "April", "May", "June",
 
         
         render() {
+            
             // page count loop, gets number of pages based on length of docs array(which contains all the articles)
             let pagecount = []
             for (var i = 1; i <= Math.ceil(this.state.docs.length/20); i++) {
