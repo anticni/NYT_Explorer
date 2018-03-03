@@ -14,25 +14,24 @@ const monthNames = ["January", "February", "March", "April", "May", "June",
         constructor(props){
 
             super(props);
-            this.state = {year:"",month:""};
+            this.state = {year:"",month:"", submit:false};
             this.handleDate = this.handleDate.bind(this);
             this.handleSubmit = this.handleSubmit.bind(this);
         }
 
 
         handleDate(event){
-            const year = document.getElementById('yearpick').value;
-            const month = document.getElementById('monthpick').value;
-            this.setState({year:year,month:month});
+            const target = event.target;
+            const value = target.type === 'checkbox' ? target.checked : target.value;
+            const name = target.name;
+
+            this.setState({[name]: value});
         }
 
         handleSubmit(event) {
             event.preventDefault();
-            console.log(event.target.value)
-            const year = document.getElementById('yearpick').value;
-            const month = document.getElementById('monthpick').value;
-            this.setState({year:year,month:month});
-            console.log(this.state)
+            this.setState({submit:true});
+            console.log(this.state);
         }
 
         render(){
@@ -41,18 +40,18 @@ const monthNames = ["January", "February", "March", "April", "May", "June",
                     yearselect.push(<option key={i} value={i}>{i}</option>);
                 }
             let form = <form onSubmit={this.handleSubmit}>
-                              <select name="monthpicker" id="monthpick" className="datepicker">
+                              <select value={this.state.month} name="month" id="monthpick" className="datepicker" onChange={this.handleDate}>
                                   <option style={{display:'none'}} value="">Month</option>
                                   {monthNames.map((month,index) => 
-                                         <option key={index} value={index+1}>{month}</option>)}
+                                   <option key={index} value={index+1}>{month}</option>)}
                               </select>
-                              <select name="yearpicker" id="yearpick" className="datepicker">
+                              <select value={this.state.year} name="year" id="yearpick" className="datepicker" onChange={this.handleDate}>
                                 <option style={{display:'none'}} value="">Year</option>
                                 {yearselect}
                               </select>
                          <input type="submit" className="findbtn" value="Find" />
                          </form> ;
-            if (this.state.year=="" || this.state.month=="") {
+            if (!this.state.submit) {
                 return (<div>
                             {form}
                             Enter a Date
@@ -83,11 +82,9 @@ const monthNames = ["January", "February", "March", "April", "May", "June",
 
         componentDidMount(){
             this.ajax();
-            debugger;
         }
         componentWillReceiveProps(){
             this.ajax();
-            debugger;
         }
         ajax(){
             const month = this.props.month;
@@ -139,7 +136,7 @@ const monthNames = ["January", "February", "March", "April", "May", "June",
             //     "key": "5a8ebb935fe6d61d084d8e03e1012a86b3635549fe59d",
             //     "q": doc.web_url
             // },
-            url: "http://api.linkpreview.net/?key=123456&q=https://www.google.com",
+            url: "https://api.linkpreview.net/?key=123456&q=https://www.google.com",
             success: this.getPreview
             })
 
@@ -181,7 +178,7 @@ const monthNames = ["January", "February", "March", "April", "May", "June",
                 }
 
             if (this.state.docs[0]==0) {
-                return <div className="nodate">Please enter date</div>
+                return <div className="nodate">No articles to be shown<br/>Please check if you selected a date.</div>
             }
             if (this.state.preview.length >= 20 || this.state.lastpage == undefined) {
                 return   <div className="root-wrapper">
