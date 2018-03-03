@@ -179,7 +179,7 @@ const monthNames = ["January", "February", "March", "April", "May", "June",
 
         
         render() {
-            
+
             // page count loop, gets number of pages based on length of docs array(which contains all the articles)
             let pagecount = []
             for (var i = 1; i <= Math.ceil(this.state.docs.length/20); i++) {
@@ -209,7 +209,7 @@ const monthNames = ["January", "February", "March", "April", "May", "June",
                                 {pagecount}
                             </select>
                          </div>
-                            <footer><a href="http://developer.nytimes.com">
+                            <footer><a href="http://developer.nytimes.com" target="_blank">
                                 <img src="https://static01.nytimes.com/packages/images/developer/logos/poweredby_nytimes_150b.png" alt="NYTimes API" />
                               </a>
                               <a href="https://www.google.com/bookmarks/" target="_blank">
@@ -303,7 +303,7 @@ const monthNames = ["January", "February", "March", "April", "May", "June",
                         <img src={this.props.link.image}></img>
                             <div className="body">
                                 <p>{this.props.link.description}</p>
-                                <a href={this.props.link.url}>Link</a>
+                                <a href={this.props.link.url} target="_blank">Link</a>
                                     <p style={{'textAlign':'center'}} className="caret">&#9660;</p>
                                 <pre id={this.props.count}  style={{display:'none'}}>{JSON.stringify(this.props.details, undefined, 2)}</pre>
                             </div>
