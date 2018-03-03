@@ -1,34 +1,34 @@
-#DONE
--input tags -- year, month and FIND button
--display search results using ajax in react
--mapping first 20 results to render in app
--create class component for rendering urls(Url class)
--adding LinkPreview API
--render LinkPreview data instead of urls
--progress bar
--synchronise linkpreview api calls
--JSON details per result in app
--JSONified doc results on click
--results in pageview
--details in desktop view
--display last <20 search results
--bug -- loading does not show for last page 
--better date picker
--pretty print for json details
--responsive css
--better detail view for both mobile and desktop
--styling of results
--bookmarks(using google bookmarks)
--better progress bar
+# DONE
+- input tags -- year, month and FIND button
+- display search results using ajax in react
+- mapping first 20 results to render in app
+- create class component for rendering urls(Url class)
+- adding LinkPreview API
+- render LinkPreview data instead of urls
+- progress bar
+- synchronise linkpreview api calls
+- JSON details per result in app
+- JSONified doc results on click
+- results in pageview
+- details in desktop view
+- display last <20 search results
+- bug --  loading does not show for last page 
+- better date picker
+- pretty print for json details
+- responsive css
+- better detail view for both mobile and desktop
+- styling of results
+- bookmarks(using google bookmarks)
+- better progress bar
 
-#TODO
+# TODO
 
 
 
-#BACKLOG
+# BACKLOG
 
--bookmarking,download etc.(more features)
--css style - page design
+- bookmarking,download etc.(more features)
+- css style -  page design
 
 
 
