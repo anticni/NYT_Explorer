@@ -22,11 +22,15 @@ h1, footer {
     text-align: center;
     box-shadow: 0 2px 2px 0 rgba(0,0,0,.14),0 3px 1px -2px rgba(0,0,0,.2),0 1px 5px 0 rgba(0,0,0,.12);
 }
+footer img{
+    vertical-align: middle;
+}
 .cards {
     display: flex;
     flex-wrap:wrap;
     margin: 0 auto;
     float:left;
+    height: 100%;
   
 }
 
@@ -37,7 +41,11 @@ h1, footer {
 }
 .detailFloat{
     width:30%;
+    max-height: 1000px;
     float:right;
+    overflow-y: scroll;
+    box-shadow: 0 2px 2px 0 rgba(0,0,0,.14),0 3px 1px -2px rgba(0,0,0,.2),0 1px 5px 0 rgba(0,0,0,.12);
+    background-color: #fff;
 }
 
 .card header {
@@ -61,7 +69,10 @@ h1, footer {
 }
 
 .inline{
-    display:flex;
+    height: 100%;
+    margin: 0;
+    display: flex;
+    flex-direction: row;
 }
 
 
@@ -70,6 +81,11 @@ h1, footer {
 .home{
     position: relative;
     text-align: center;
+}
+.error{
+    position: relative;
+    text-align: center;
+    color: darkred;
 }
 
 .findbtn:hover {
@@ -123,18 +139,18 @@ pre {
 /* Smartphones (landscape) ----------- */
 @media only screen and (min-width : 320px) and (max-width: 480px) {
 .showhide {
-       display: block !important;
+   display: block !important;
 
 }
-.root-clicked{
+.clicked{
     width:100%;
 }
 .detailFloat{
-display:none;
+    display:none;
 }
 .card {
- margin: 5px 0px;
- width: 100%;
+    margin: 5px 0px;
+    width: 100%;
 }
 
 }
@@ -142,10 +158,10 @@ display:none;
 /* Smartphones (portrait) ----------- */
 @media only screen and (max-width : 320px) {
 .showhide {
-       display: block !important;
+    display: block !important;
   
 }
-.root-clicked{
+.clicked{
     width:100%;
 }
 .detailFloat{

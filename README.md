@@ -19,10 +19,11 @@
 -better detail view for both mobile and desktop
 -styling of results
 -bookmarks(using google bookmarks)
+-better progress bar
 
 #TODO
 
--better progress bar
+
 
 #BACKLOG
 
