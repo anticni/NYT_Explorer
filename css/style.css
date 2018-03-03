@@ -14,7 +14,7 @@ img {
     max-width: 100%;
 }
 
-h1 {
+h1, footer {
     padding: 1em;
     color: white;
     background-color: royalblue;
@@ -61,12 +61,10 @@ h1 {
 }
 
 .inline{
-    display:inline-block;
+    display:flex;
 }
 
-.caret{
-    content: &#9660;
-}
+
 
 /*INPUT CSS*/
 .home{

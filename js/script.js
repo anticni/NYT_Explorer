@@ -21,11 +21,10 @@ const monthNames = ["January", "February", "March", "April", "May", "June",
 
 
         handleDate(event){
-            // const target = event.target;
-            // const value = target.type === 'checkbox' ? target.checked : target.value;
-            // const name = target.name;
-            // this.state.submit = false;
-            // this.setState({[name]: value});
+            const target = event.target;
+            const value = target.type === 'checkbox' ? target.checked : target.value;
+            const name = target.name;
+            this.setState({[name]: value});
         }
 
         handleSubmit(event) {
@@ -43,12 +42,12 @@ const monthNames = ["January", "February", "March", "April", "May", "June",
                     yearselect.push(<option key={i} value={i}>{i}</option>);
                 }
             let form = <form onSubmit={this.handleSubmit}>
-                              <select defaultValue={this.state.month} name="month" id="monthpick" className="datepicker">
+                              <select defaultValue={this.state.month} name="month" id="monthpick" className="datepicker" onChange={this.handleDate}>
                                   <option style={{display:'none'}} value="">Month</option>
                                   {monthNames.map((month,index) => 
                                    <option key={index} value={index+1}>{month}</option>)}
                               </select>
-                              <select defaultValue={this.state.year} name="year" id="yearpick" className="datepicker">
+                              <select defaultValue={this.state.year} name="year" id="yearpick" className="datepicker" onChange={this.handleDate}>
                                 <option style={{display:'none'}} value="">Year</option>
                                 {yearselect}
                               </select>
@@ -57,6 +56,7 @@ const monthNames = ["January", "February", "March", "April", "May", "June",
 
             if (this.state.submit) {
                 return <App year={this.state.year} month={this.state.month} searchbox={form} />;
+
             }                         
                 return (<div className="home">
                             <div className="searchbox start">
@@ -172,28 +172,13 @@ const monthNames = ["January", "February", "March", "April", "May", "June",
 
         
         render() {
-            let yearselect = [];
-                for (var i = 2018; i > 1850; i--) {
-                    yearselect.push(<option key={i} value={i}>{i}</option>);
-                }
-            let form = <form onSubmit={this.handleSubmit}>
-                              <select defaultValue={this.props.month} name="month" id="monthpick" className="datepicker">
-                                  <option style={{display:'none'}} value="">Month</option>
-                                  {monthNames.map((month,index) => 
-                                   <option key={index} value={index+1}>{month}</option>)}
-                              </select>
-                              <select defaultValue={this.props.year} name="year" id="yearpick" className="datepicker">
-                                <option style={{display:'none'}} value="">Year</option>
-                                {yearselect}
-                              </select>
-                         <input type="submit" className="datepicker" value="Find" />
-                         </form>;
 
             let pagecount = []
             for (var i = 1; i <= Math.ceil(this.state.docs.length/20); i++) {
 
                         pagecount.push(<option key={i-1} value={(i-1)*20}>{i}</option>)
                 }
+
 
             if (this.state.docs[0]==0) {
                 return <div className="nodate">No articles to be shown<br/>Please check if you selected a date.</div>
@@ -209,8 +194,11 @@ const monthNames = ["January", "February", "March", "April", "May", "June",
                                 <select className="selectbtn" value={this.state.page} onChange={this.handlePage}>
                                 {pagecount}
                                 </select>
-                        </div>
-
+                            </div>
+                                <footer><a href="http://developer.nytimes.com">
+                            <img src="http://static01.nytimes.com/packages/images/developer/logos/poweredby_nytimes_150b.png" alt="NYTimes API" />
+                                    </a>
+                            </footer> 
                          </div>;     
                 
             }
