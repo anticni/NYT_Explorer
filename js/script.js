@@ -21,18 +21,21 @@ const monthNames = ["January", "February", "March", "April", "May", "June",
 
 
         handleDate(event){
-            const target = event.target;
-            const value = target.type === 'checkbox' ? target.checked : target.value;
-            const name = target.name;
-
-            this.setState({[name]: value});
+            // const target = event.target;
+            // const value = target.type === 'checkbox' ? target.checked : target.value;
+            // const name = target.name;
+            // this.state.submit = false;
+            // this.setState({[name]: value});
         }
 
         handleSubmit(event) {
             event.preventDefault();
-            this.setState({submit:true});
+            const year = document.getElementById("yearpick").value;
+            const month = document.getElementById("monthpick").value;
+            this.setState({year:year, month:month, submit:true});
             console.log(this.state);
         }
+
 
         render(){
             let yearselect = [];
@@ -40,28 +43,26 @@ const monthNames = ["January", "February", "March", "April", "May", "June",
                     yearselect.push(<option key={i} value={i}>{i}</option>);
                 }
             let form = <form onSubmit={this.handleSubmit}>
-                              <select value={this.state.month} name="month" id="monthpick" className="datepicker" onChange={this.handleDate}>
+                              <select defaultValue={this.state.month} name="month" id="monthpick" className="datepicker">
                                   <option style={{display:'none'}} value="">Month</option>
                                   {monthNames.map((month,index) => 
                                    <option key={index} value={index+1}>{month}</option>)}
                               </select>
-                              <select value={this.state.year} name="year" id="yearpick" className="datepicker" onChange={this.handleDate}>
+                              <select defaultValue={this.state.year} name="year" id="yearpick" className="datepicker">
                                 <option style={{display:'none'}} value="">Year</option>
                                 {yearselect}
                               </select>
-                         <input type="submit" className="findbtn" value="Find" />
-                         </form> ;
-            if (!this.state.submit) {
-                return (<div>
-                            {form}
-                            Enter a Date
-                        </div>);
+                         <input type="submit" className="datepicker" value="Find" />
+                         </form>;
+
+            if (this.state.submit) {
+                return <App year={this.state.year} month={this.state.month} searchbox={form} />;
             }                         
-                return (<div>
-                            <div className="searchbox">
+                return (<div className="home">
+                            <div className="searchbox start">
                             {form}
                             </div>
-                            <App year={this.state.year} month={this.state.month} />
+                           <p>Enter a Date to search articles</p>
                         </div>);
                
             }
@@ -171,7 +172,24 @@ const monthNames = ["January", "February", "March", "April", "May", "June",
 
         
         render() {
-            var pagecount = []
+            let yearselect = [];
+                for (var i = 2018; i > 1850; i--) {
+                    yearselect.push(<option key={i} value={i}>{i}</option>);
+                }
+            let form = <form onSubmit={this.handleSubmit}>
+                              <select defaultValue={this.props.month} name="month" id="monthpick" className="datepicker">
+                                  <option style={{display:'none'}} value="">Month</option>
+                                  {monthNames.map((month,index) => 
+                                   <option key={index} value={index+1}>{month}</option>)}
+                              </select>
+                              <select defaultValue={this.props.year} name="year" id="yearpick" className="datepicker">
+                                <option style={{display:'none'}} value="">Year</option>
+                                {yearselect}
+                              </select>
+                         <input type="submit" className="datepicker" value="Find" />
+                         </form>;
+
+            let pagecount = []
             for (var i = 1; i <= Math.ceil(this.state.docs.length/20); i++) {
 
                         pagecount.push(<option key={i-1} value={(i-1)*20}>{i}</option>)
@@ -182,6 +200,7 @@ const monthNames = ["January", "February", "March", "April", "May", "June",
             }
             if (this.state.preview.length >= 20 || this.state.lastpage == undefined) {
                 return   <div className="root-wrapper">
+                             {this.props.searchbox}
                              <div className="inline">
                              <Url article={this.state.preview} docs={this.state.docs} detail={this.state.detail} />
                              <pre className="detailFloat" id="detailFloat"></pre>
@@ -195,7 +214,12 @@ const monthNames = ["January", "February", "March", "April", "May", "June",
                          </div>;     
                 
             }
-            return <div> loading</div>
+            return <div> 
+                    <div className="spinner">
+                        <div className="dot1"></div>
+                        <div className="dot2"></div>
+                    </div>
+                   </div>
         }    
     }
 
