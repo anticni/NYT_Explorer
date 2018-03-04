@@ -302,7 +302,7 @@ const monthNames = ["January", "February", "March", "April", "May", "June",
                         </header>
                         <img src={this.props.link.image}></img>
                             <div className="body">
-                                <p>{this.props.link.description}</p>
+                                <p className="description">{this.props.link.description}</p>
                                 <a href={this.props.link.url} target="_blank">Link</a>
                                     <p style={{'textAlign':'center'}} className="caret">&#9660;</p>
                                 <pre id={this.props.count}  style={{display:'none'}}>{JSON.stringify(this.props.details, undefined, 2)}</pre>
